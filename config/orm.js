@@ -69,15 +69,29 @@ let orm = {
     });
   },
   
-  update: function(table, values, condition, cb) {
-    let queryString = "UPDATE ?? SET ? WHERE ?";
+  update: function(table, objColVals, condition, cb) {
+    var queryString = "UPDATE " + table;
 
-    console.log(queryString);
-    connection.query(queryString, [table, values, condition], function(err, result) {
+    queryString += " SET ";
+    queryString += objToSql(objColVals);
+    queryString += " WHERE ";
+    queryString += condition;
+
+    connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
       }
 
+      cb(result);
+    });
+  },
+  delete: function(table1, filters, cb){
+    let query = "DELETE FROM ?? WHERE ?";
+
+    connection.query(query, [table1, filters], (err, result) => {
+      if(err) {
+        throw err;
+      }
       cb(result);
     });
   }

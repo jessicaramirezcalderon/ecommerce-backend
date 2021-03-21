@@ -1,4 +1,4 @@
-<h2>New Order</h2>
+<h3>Add the burgers you would like to eat. Once you've eaten it, move it to the devoured section.</h3>
 <form class="create-form">
 
   <div class="form-group">
@@ -7,29 +7,29 @@
   </div>
 
   <div class="form-group">
-    <label for="status">What's the order status?</label><br>
-    <input type="radio" name="status" value="1" checked> New order<br>
-    <input type="radio" name="status" value="0"> Eaten
+    <input type="hidden" name="status" value="1">
   </div>
 
   <button type="submit">Add Order</button>
 </form>
 
-<ul>
-  {{#each burgers}}
-    {{#unless this.devoured}}
-      {{> burger devoured=true name=this.name}}
-    {{/unless}}
-  {{/each}}
-</ul>
-
-<h2>Devoured Burgers</h2>
+<h4>To Be Eaten</h4>
 
 <ul>
   {{#each burgers}}
     {{#if this.devoured}}
       {{> burger devoured=false name=this.name}}
     {{/if}}
+  {{/each}}
+</ul>
+
+<h4>Devoured Burgers</h4>
+
+<ul>
+  {{#each burgers}}
+    {{#unless this.devoured}}
+      {{> burger devoured=true name=this.name}}
+    {{/unless}}
   {{/each}}
 </ul>
 

@@ -11,7 +11,7 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 
 $(function() {
-    $(".delete-button").on("click", function(event) {
+    $(".delete-button").on("click", function() {
       console.log("Delete worked");
       console.log(this);
       const button = $(this);
@@ -19,16 +19,16 @@ $(function() {
       const id = button.attr("data-id");
       $.ajax("/api/burgers/" + id, {
         type: "DELETE"
-      }).then(
+      }).done(
         function(results) {
           console.log(results);
           location.reload();
         }
       );
     });
-    $(".change-status").on("click", function(event) {
+    $(".change-status").on("click", function() {
       const id = $(this).data("id");
-      const newStatus = $(this).data("newstatus");
+      const newStatus = $(this).data("newdev");
   
       const newStatusState = {
         status: newStatus
@@ -37,14 +37,17 @@ $(function() {
       // Send the PUT request.
       $.ajax("/api/burgers/" + id, {
         type: "PUT",
-        data: newStatusState
-      }).then(
-        function() {
+        data: newStatusState,
+        dataType: "json",
+      })
+      .success(function() {
           console.log("changed status to", newStatus);
           // Reload the page to get the updated list
           location.reload();
-        }
-      );
+        })
+        .fail(function(e) {
+            console.error(e);
+        });
     });
   
     $(".create-form").on("submit", function(event) {
@@ -53,7 +56,7 @@ $(function() {
   
       const newBurger = {
         name: $("#burger-name").val().trim(),
-        devoured: $("[name=status]:checked").val().trim() 
+        devoured: $("[name=status]").val().trim() 
     
       };
   
@@ -62,7 +65,7 @@ $(function() {
         type: "POST",
         data: newBurger,
         dataType: "json",
-      }).then(
+      }).done(
         function() {
           console.log("created new burger");
           // Reload the page to get the updated list
