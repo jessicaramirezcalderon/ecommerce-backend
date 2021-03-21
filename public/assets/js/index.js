@@ -27,20 +27,20 @@ $(function() {
       );
     });
     $(".change-status").on("click", function(event) {
-      var id = $(this).data("id");
-      var newSleep = $(this).data("newsleep");
+      const id = $(this).data("id");
+      const newStatus = $(this).data("newstatus");
   
-      var newSleepState = {
-        sleepy: newSleep
+      const newStatusState = {
+        status: newStatus
       };
   
       // Send the PUT request.
       $.ajax("/api/burgers/" + id, {
         type: "PUT",
-        data: newSleepState
+        data: newStatusState
       }).then(
         function() {
-          console.log("changed status to", newSleep);
+          console.log("changed status to", newStatus);
           // Reload the page to get the updated list
           location.reload();
         }
@@ -51,15 +51,17 @@ $(function() {
       // Make sure to preventDefault on a submit event.
       event.preventDefault();
   
-      const newCat = {
-        name: $("#ca").val().trim(),
-        sleepy: $("[name=sleepy]:checked").val().trim()
+      const newBurger = {
+        name: $("#burger-name").val().trim(),
+        devoured: $("[name=status]:checked").val().trim() 
+    
       };
   
       // Send the POST request.
       $.ajax("/api/burgers", {
         type: "POST",
-        data: newCat
+        data: newBurger,
+        dataType: "json",
       }).then(
         function() {
           console.log("created new burger");
