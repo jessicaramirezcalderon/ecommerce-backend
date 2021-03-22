@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "./node_modules/.bin/nodemon server.js",
+    "dev": "./node_modules/.bin/nodemon server.js",
+    "start": "./node_modules/.bin/forever start server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +21,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^5.2.1",
+    "forever": "^3.0.4",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7"
   }
