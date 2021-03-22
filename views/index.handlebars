@@ -1,15 +1,18 @@
-<h1>Burger Palace</h1>
+<header>
+    <h1>Burger Palace</h1>
+    <h4>Add the burgers you would like to eat. Once you've eaten it, move it to the devoured section.</h4>
+</header>
+
 <main>
 
-<h3>Add the burgers you would like to eat. Once you've eaten it, move it to the devoured section.</h3>
-<form class="create-form form-inline">
+<form class="create-form form-inline justify-content-center">
 
     <div class="form-group mx-sm-3 mb-2">
-        <label for="burger-name">Burger Name:</label>
-        <input type="text" id="burger-name" name="name" class="form-control">
+        <label for="burger-name"></label>
+        <input type="text" id="burger-name" name="name" class="form-control" placeholder="Enter Burger Name">
     </div>
 
-    <div class="form-group mx-sm-3 mb-2">
+    <div class="form-group">
         <input type="hidden" name="status" value="1" class="form-control">
         <button type="submit" class="btn btn-primary mb-2">Add Order</button>
     </div>
@@ -17,7 +20,7 @@
 </form>
 
 <div>
-    <ul>
+    <ul class="justify-content-left">
         <h4>New Items</h4>
         {{#each burgers}}
         {{#if this.devoured}}
@@ -26,7 +29,7 @@
         {{/each}}
     </ul>
 
-    <ul>
+    <ul class="justify-content-left">
         <h4>Devoured Burgers</h4>
         {{#each burgers}}
         {{#unless this.devoured}}
