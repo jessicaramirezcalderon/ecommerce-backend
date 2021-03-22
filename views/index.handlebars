@@ -1,36 +1,38 @@
+<h1>Burger Palace</h1>
+<main>
+
 <h3>Add the burgers you would like to eat. Once you've eaten it, move it to the devoured section.</h3>
-<form class="create-form">
+<form class="create-form form-inline">
 
-  <div class="form-group">
-    <label for="burger-name">Burger Name:</label>
-    <input type="text" id="burger-name" name="name">
-  </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="burger-name">Burger Name:</label>
+        <input type="text" id="burger-name" name="name" class="form-control">
+    </div>
 
-  <div class="form-group">
-    <input type="hidden" name="status" value="1">
-  </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <input type="hidden" name="status" value="1" class="form-control">
+        <button type="submit" class="btn btn-primary mb-2">Add Order</button>
+    </div>
 
-  <button type="submit">Add Order</button>
 </form>
 
-<h4>To Be Eaten</h4>
+<div>
+    <ul>
+        <h4>New Items</h4>
+        {{#each burgers}}
+        {{#if this.devoured}}
+        {{> burger devoured=false name=this.name}}
+        {{/if}}
+        {{/each}}
+    </ul>
 
-<ul>
-  {{#each burgers}}
-    {{#if this.devoured}}
-      {{> burger devoured=false name=this.name}}
-    {{/if}}
-  {{/each}}
-</ul>
-
-<h4>Devoured Burgers</h4>
-
-<ul>
-  {{#each burgers}}
-    {{#unless this.devoured}}
-      {{> burger devoured=true name=this.name}}
-    {{/unless}}
-  {{/each}}
-</ul>
-
-
+    <ul>
+        <h4>Devoured Burgers</h4>
+        {{#each burgers}}
+        {{#unless this.devoured}}
+        {{> burger devoured=true name=this.name}}
+        {{/unless}}
+        {{/each}}
+    </ul>
+</div>
+</main>
